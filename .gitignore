@@ -1,0 +1,36 @@
+# Visual Studio 临时文件
+.vs/
+*.user
+*.vcxproj.user
+
+# 构建输出目录（Debug/Release等）
+Debug/
+Release/
+out/
+x64/
+x86/
+cmake-build-*/
+build/
+
+# CMake 生成物（如果 cmake 文件夹是源码中用于查找模块的，则保留；如果是构建生成的，则忽略）
+# 根据文件名推测 cmake 文件夹可能是源码的一部分（含 .cmake 文件），建议保留，但如果你有本地构建生成的内容，可自行调整。
+
+# 编译中间文件
+*.obj
+*.exe
+*.dll
+*.lib
+*.pdb
+*.ilk
+*.exp
+*.log
+*.tlog
+
+# 其他临时文件
+*.tmp
+*.cache
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb

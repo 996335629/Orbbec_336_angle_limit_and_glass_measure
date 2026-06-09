@@ -1,0 +1,13 @@
+1.建议：搞个双系统ubuntu或者WSL写一下试试。
+
+我这里面是在win系统上用Visual studio并基于C++的V1版本写的。
+他官方示例都是ubuntu，我自己尝试在虚拟机里写ROS_C++的代码，发现帧率极低。每秒0.1-3帧，故放弃，转战直接在win上写。
+
+2.建议：ubuntu的V2+ROS_C++版本
+
+建议用ubuntu的V2+ROS_C++版本，理由很简单，方便，并且你用ai生成代码会发现它老是把v2的函数给你用进去，我用V1是我想着继承一下前人写的，而且在Visual studio上直接代码生成项目会发现所有示例的代码都堆一起。而且V1有不少
+注意先配好环境啊。ubuntu按照示例一步步走即可
+
+V2的github仓库：https://github.com/orbbec/OrbbecSDK_v2
+
+3.
