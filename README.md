@@ -58,4 +58,50 @@
 
 # 另外
 可以试一下接入orbbec336+地瓜RDK X5的板子，不过想要实时处理有点不够，算法处理的也是一坨。所以我还是在自己电脑上跑了
-地瓜RDK X5已经连接同一个wifi, IP地址为192.168.0.119，端口22，用户名和密码都是root，或者都是sunrise（应该？），你也可以先接USB线连起来，让他自动检测。
+首先你需要下一个RDK studio，里面有官方的ai帮你干一些基础的活。
+https://developer.d-robotics.cc/rdkx5
+
+地瓜RDK X5已经连接同一个wifi, IP地址为这个有可能变，你需要自己按照教程连接试试，用户名和密码都是root，或者都是sunrise（应该？）。
+先接USB线连起来，让他自动检测。
+假如接了连接不上，按下面的试试（注意是在powershell下）
+Step 1:完全重置「以太网 3」+ 物理重连(5 分钟)
+先做这一步,做完了把 `ipconfig` 输出贴我。
+powershell
+
+1) 释放当前租约
+ipconfig /release "*以太网 3*"
+
+2) 重置整张网卡的协议栈(关键:这一步会清掉之前所有 netsh 残留的静态 IP)
+netsh int ip reset
+netsh winsock reset
+
+3) 在 PC 端操作完后,**手动做这一步物理动作**:
+    - 拔掉 TYPEC 线
+    - 等 5 秒
+    - 重新插入
+    (让板子端 RNDIS 重新枚举)
+
+4) 等待 **60 秒** (RDK X5 板子端 dnsmasq + gadget 启动可能慢)
+
+5) 看 IP
+ipconfig
+成功标志: 「以太网 3」拿到了 192.168.128.x 的 IP(很可能是 192.168.128.10)。拿到后直接 `ping 192.168.128.1` 验证,通了就完事了。
+失败标志: 还是 169.254.x.x → 进入 Step 2。
+Step 2:PowerShell cmdlet 配静态 + 关 IPv6(只在前一步失败时做)
+powershell
+
+1) 完全关掉 DHCP 客户端,不让它再抢
+Set-NetIPInterface -InterfaceAlias "以太网 3" -DHCP Disabled
+
+2) 用 PowerShell cmdlet 写静态 IP(.222 段不冲突的地址,不要用 netsh)
+ 不设网关,因为我们只走 L2 直连
+New-NetIPAddress -InterfaceAlias "以太网 3" -IPAddress 192.168.128.222 -PrefixLength 24
+
+3) 关 IPv6,免得它来回抢路由
+Disable-NetAdapterBinding -InterfaceAlias "以太网 3" -ComponentID "ms_tcpip6"
+
+ 4) 验证 + ping 板子
+ipconfig
+ping 192.168.128.1
+
+之后你可以让Ai
