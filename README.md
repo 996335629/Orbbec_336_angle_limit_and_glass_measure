@@ -105,4 +105,4 @@ Disable-NetAdapterBinding -InterfaceAlias "以太网 3" -ComponentID "ms_tcpip6"
 ipconfig
 ping 192.168.128.1
 
-之后你可以让Ai
+之后你可以让Ai帮你找一下wifi的地址，然后现在RDK里连接，而后可以借助vscode之类的，通过SSH连接，ssh root@192.168.0.111。
