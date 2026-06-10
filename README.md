@@ -64,7 +64,7 @@ https://developer.d-robotics.cc/rdkx5
 地瓜RDK X5已经连接同一个wifi, IP地址为这个有可能变，你需要自己按照教程连接试试，用户名和密码都是root，或者都是sunrise（应该？）。
 先接USB线连起来，让他自动检测。
 假如接了连接不上，按下面的试试（注意是在powershell下）
-Step 1:完全重置「以太网 3」+ 物理重连(5 分钟)
+## Step 1:完全重置「以太网 3」+ 物理重连(5 分钟)
 先做这一步,做完了把 `ipconfig` 输出贴我。
 powershell
 
@@ -87,7 +87,8 @@ netsh winsock reset
 ipconfig
 成功标志: 「以太网 3」拿到了 192.168.128.x 的 IP(很可能是 192.168.128.10)。拿到后直接 `ping 192.168.128.1` 验证,通了就完事了。
 失败标志: 还是 169.254.x.x → 进入 Step 2。
-Step 2:PowerShell cmdlet 配静态 + 关 IPv6(只在前一步失败时做)
+
+## Step 2:PowerShell cmdlet 配静态 + 关 IPv6(只在前一步失败时做)
 powershell
 
 1) 完全关掉 DHCP 客户端,不让它再抢
