@@ -2,6 +2,8 @@ Orbbec_336_角度限幅与幕墙高度
 
 代码我写的我放在my_code里了，还有一些跟AI的讨论，不过也有点拉。
 
+这里面写的是用WIN系统+visual studio+ORBBEC写的，请转到https://github.com/996335629/glassarea_measure，这里面是地瓜RDK X5+LINUX+ORBBEC
+
 # 1.旋转角度限幅；
 
 基本要求：
